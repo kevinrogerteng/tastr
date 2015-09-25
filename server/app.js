@@ -19,11 +19,6 @@ app.locals.title = "Tastr";
 app.locals.email =  "kevin.roger.teng@gmail.com";
 app.set('view engine', 'html');
 
-// app.get('/', function(req, res){
-//   console.log("touch route directory");
-//   res.send('hello world');
-// });
-
 //set the static folder
 app.use(serveStatic(__dirname + '/../client', {'index': ['index.html']}));
 
