@@ -17,7 +17,11 @@
   },
   "homepage": "https://github.com/kevinrogerteng/tastr",
   "dependencies": {
+    "body-parser": "^1.14.0",
+    "cookie-parser": "^1.4.0",
     "express": "^4.13.3",
-    "express-winston": "^0.4.1"
+    "express-winston": "^0.4.1",
+    "mongoose": "^4.1.8",
+    "rc": "^1.1.1"
   }
 }
