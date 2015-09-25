@@ -3,3 +3,6 @@
 NodeJS as Server
 ExpressJS as WebServer
 Express Winston as WebServer Logger
+Winston https://github.com/winstonjs/winston
+rc https://www.npmjs.com/package/rc
+Serve-Static https://www.npmjs.com/package/serve-static

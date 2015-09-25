@@ -9,6 +9,7 @@ GLOBAL.include = function(file){
 
 var express = require('express');
 var mongoose = require('mongoose');
+var serveStatic = require('serve-static');
 
 var app = express();
 
@@ -18,9 +19,12 @@ app.locals.title = "Tastr";
 app.locals.email =  "kevin.roger.teng@gmail.com";
 app.set('view engine', 'html');
 
-app.get('/', function(req, res){
-  console.log("touch route directory");
-  res.send('hello world');
-});
+// app.get('/', function(req, res){
+//   console.log("touch route directory");
+//   res.send('hello world');
+// });
+
+//set the static folder
+app.use(serveStatic(__dirname + '/../client', {'index': ['index.html']}));
 
 module.exports = app;

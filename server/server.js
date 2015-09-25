@@ -12,8 +12,11 @@
 
 var app = require('./app');
 var config = require('./config');
-// var logger = require('winston');
+var logger = require('winston');
 
 app.listen(config.port);
-console.log('Server is running at localhost:' + config.port);
+
+logger.log("info", "this is an info");
+logger.log("info", "Server is running at localhost:" + config.port);
+
 module.exports = app;
