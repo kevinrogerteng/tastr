@@ -1,0 +1,3 @@
+#the gitignore file
+
+**/node_modules
