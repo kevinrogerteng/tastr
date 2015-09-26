@@ -17,14 +17,15 @@ module.exports = function(grunt){
       options: {
         template: '<%= FILE_PATHS.client %>/indexTemplate.html',
         relative: true,
-        addRootSlash: false 
-      },
+        addRootSlash: false
+      }, 
       dev: {
         files: {
           '<%= FILE_PATHS.client %>/index.html': [
             '<%= FILE_PATHS.client %>/css/**/*.css',
             '<%= FILE_PATHS.client %>/modules/**/*.js',
-            '<%= FILE_PATHS.client %>/modules/*.js'
+            '<%= FILE_PATHS.client %>/modules/*.js',
+            '<%= FILE_PATHS.client %>/bootstrap.js'
           ]
         }
       }
