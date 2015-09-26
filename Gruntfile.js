@@ -2,6 +2,7 @@ module.exports = function(grunt){
 
   grunt.loadNpmTasks('grunt-injector'); 
   grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-wiredep');
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
@@ -14,25 +15,33 @@ module.exports = function(grunt){
     },
     injector: {
       options: {
-        starttag: '<!-- app -->',
-        endtag: '<! end of injector -->',
         template: '<%= FILE_PATHS.client %>/indexTemplate.html',
         relative: true,
         addRootSlash: false 
       },
-      index: {
+      dev: {
         files: {
           '<%= FILE_PATHS.client %>/index.html': [
             '<%= FILE_PATHS.client %>/css/**/*.css',
             '<%= FILE_PATHS.client %>/modules/**/*.js',
-            '<%= FILE_PATHS.client %>/modules/*.js',
+            '<%= FILE_PATHS.client %>/modules/*.js'
           ]
         }
       }
+    },    
+    wiredep: {
+      dev: {
+        src: ['<%= FILE_PATHS.client %>/index.html']
+      },
+      prod: {
+        src: ['<%= FILE_PATHS.client %>/index.html']
+      }
     }
+
   });
+
   grunt.registerTask('buildDev', function(){
     console.log('building development');
-    grunt.task.run('injector');
+    grunt.task.run('injector:dev', 'wiredep:dev');
   });
 };

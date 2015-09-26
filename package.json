@@ -37,9 +37,11 @@
     "grunt-cli": "^0.1.13",
     "grunt-contrib-concat": "^0.5.1",
     "grunt-injector": "^0.6.0",
+    "grunt-wiredep": "^2.0.0",
     "mongoose": "^4.1.8",
     "rc": "^1.1.1",
     "serve-static": "^1.10.0",
-    "winston": "^1.0.1"
+    "winston": "^1.0.1",
+    "wiredep": "^3.0.0-beta"
   }
 }
