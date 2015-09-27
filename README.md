@@ -9,3 +9,4 @@ Serve-Static https://www.npmjs.com/package/serve-static
 grunt injector https://github.com/klei/grunt-injector
 grunt wiredep https://www.npmjs.com/package/grunt-wiredep
 dotenv https://github.com/motdotla/dotenv
+grunt-nodemon https://www.npmjs.com/package/grunt-nodemon
