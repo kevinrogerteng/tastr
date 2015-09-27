@@ -3,6 +3,7 @@ module.exports = function(grunt){
   grunt.loadNpmTasks('grunt-injector'); 
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-wiredep');
+  grunt.loadNpmTasks('grunt-nodemon');
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
@@ -12,6 +13,23 @@ module.exports = function(grunt){
     },
     concat: {
       // concat task configuration goes here.
+    },
+    nodemon: {
+      dev: {
+        script: 'server/server.js',
+        options: {
+          args: [],
+          watch: ['server/*'],
+          ext: 'js',
+          nodeArgs: ['--debug'],
+          delayTime: 1,
+          env: {
+            PORT: 3000,
+            NODE_ENV: 'dev'
+          },
+          cwd: __dirname
+        }
+      }
     },
     injector: {
       options: {
