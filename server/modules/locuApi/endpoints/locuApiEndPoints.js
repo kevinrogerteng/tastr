@@ -5,8 +5,8 @@ module.exports = function(app){
 
   app.get('/api/locu/search', function(req, res){
     // locuService.queryRestaurant(req, res).then(res.sucess).catch(res.error).done();
-    locuService.queryRestaurant(req, res).then(function(res){
-      console.log(res.success);
+    locuService.queryRestaurant(req, res).then(function(response){
+      console.log(response.success);
     }).done();
   });
 };

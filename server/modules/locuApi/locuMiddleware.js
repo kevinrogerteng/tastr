@@ -12,36 +12,37 @@ var queryRestaurant = function(req){
   function validateRequest(){
     return Q.promise(function(resolve, reject){
       if (true) {
-        resolve(req);
+        resolve({success: 'successful!'});
       } else {
         reject();
       }
     });
   } 
 
-  // function queryLocuApi(validatedReq){
-  //   return Q.promise(function(resolve, reject){
-  //     var requestParams = {
-  //       'api_key' : apiKey,
-  //       'fields' : ['name', 'location', 'contact'],
-  //       'venue_queries' : {
-  //         'name' : 'Gary Danko'
-  //       }
-  //     }
+  function queryLocuApi(validatedReq){
+    return Q.promise(function(resolve, reject){
+      var requestParams = {
+        'api_key' : apiKey,
+        'fields' : ['name', 'location', 'contact'],
+        'venue_queries' : [{
+          'name' : 'Gary Danko'
+        }]
+      }
 
-  //     var url = 'https://api.locu.com/v2/venue/search';
+      var url = 'https://api.locu.com/v2/venue/search';
 
-  //     requestify.post(url, requestParams).then(function(response){
-  //       resolve(reponse);
-  //     }, function(error){
-  //       reject(error);
-  //     })
+      requestify.post(url, requestParams).then(function(response){
+        console.log(response);
+        resolve(reponse);
+      }, function(error){
+        console.log(error);
+        reject(error);
+      })
 
-  //   });
-  // }
+    });
+  }
 
-  // return validateRequest().then(queryLocuApi);
-  return validateRequest();
+  return validateRequest().then(queryLocuApi);
 };
 
 module.exports = {
