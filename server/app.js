@@ -10,6 +10,15 @@ GLOBAL.include = function(file){
 var express = require('express');
 var mongoose = require('mongoose');
 var serveStatic = require('serve-static');
+var config = require('./config');
+
+mongoose.connect('mongodb://localhost/tastr');
+var db = mongoose.connection;
+
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function (callback) {
+  console.log('mongod instance is open');
+});
 
 var app = express();
 
