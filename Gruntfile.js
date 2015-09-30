@@ -4,16 +4,21 @@ module.exports = function(grunt){
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-wiredep');
   grunt.loadNpmTasks('grunt-nodemon');
+  grunt.loadNpmTasks('grunt-mocha-test');
+  grunt.loadNpmTasks('grunt-mocha-istanbul');
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+
     FILE_PATHS: {
       client: 'client',
       server: 'server'
     },
+
     concat: {
       // concat task configuration goes here.
     },
+
     nodemon: {
       dev: {
         script: 'server/server.js',
@@ -31,6 +36,7 @@ module.exports = function(grunt){
         }
       }
     },
+
     injector: {
       options: {
         template: '<%= FILE_PATHS.client %>/indexTemplate.html',
@@ -47,7 +53,8 @@ module.exports = function(grunt){
           ]
         }
       }
-    },    
+    },
+
     wiredep: {
       dev: {
         src: ['<%= FILE_PATHS.client %>/index.html']
@@ -55,12 +62,22 @@ module.exports = function(grunt){
       prod: {
         src: ['<%= FILE_PATHS.client %>/index.html']
       }
+    },
+
+    mochaTest: {
+      test:{
+        options: {
+          reporter: 'spec',
+          clearRequireCache: false
+        },
+        src: ['server/tests/**/*Spec.js']
+      }
     }
 
   });
 
   grunt.registerTask('buildDev', function(){
     console.log('building development');
-    grunt.task.run('injector:dev', 'wiredep:dev');
+    grunt.task.run('injector:dev', 'wiredep:dev', 'mochaTest');
   });
 };
