@@ -26,7 +26,7 @@ var queryRestaurant = function(req, res){
     var deferred = Q.defer();
     var requestParams = {
         'api_key' : apiKey,
-        'fields' : ['name', 'location', 'contact'],
+        'fields' : ['name', 'location', 'contact', 'menu_url', 'menus'],
         'venue_queries' : [{
           'name' : 'Gary Danko'
         }]
