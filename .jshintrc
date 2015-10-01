@@ -1,0 +1,13 @@
+{
+  "curly": true,
+  "eqnull": true,
+  "eqeqeq": true,
+  "undef": true,
+  "mocha": true,
+  "node": true,
+  "globals" : {
+    "angular" : false,
+    "describe" : false,
+    "module" : false
+  }
+}

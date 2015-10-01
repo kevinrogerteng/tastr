@@ -19,7 +19,7 @@
   describe('Locu API Middleware', function(){
     describe('sample spec test', function(){
 
-      it('should return a 200 - restaurantQuery', function(){
+      it('should return a 200 - restaurantQuery', function(done){
         var req = httpMock.createRequest({
           method: 'GET'
         });
@@ -35,20 +35,18 @@
 
         var postApiStub = sinon.stub().returns(Q.resolve(response));
         var requestMock = {
-          get: postApiStub
+          post: postApiStub
         };
 
         middleware.__set__('requestify', requestMock);
-        middleware.queryRestaurant(req, res).then(function(response){
-          expect(true).to.equal(false);
-          expect(response.status).to.equal('success');
-        });
-      });
 
-      it('should fail', function(){
-        expect(false).to.equal(false);
-      });
+        return middleware.queryRestaurant(req, res).then(function(response){
+          expect(response[0].status).to.equal('success');
+          done();
+        }).done();
 
+
+      });
     });
   });
 })();

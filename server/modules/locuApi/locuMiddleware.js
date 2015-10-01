@@ -26,11 +26,19 @@ var queryRestaurant = function(req, res){
     var deferred = Q.defer();
     var requestParams = {
         'api_key' : apiKey,
-        'fields' : ['name', 'location', 'contact', 'menu_url', 'menus'],
+        'fields' : ['name', 'location', 'contact', 'menu_url', 'menus', 'categories'],
         'venue_queries' : [{
-          'name' : 'Gary Danko'
-        }]
-      }
+          'name' : 'Park',
+          'location' : {
+            'locality' : "San Francisco"
+          }, 
+          'categories': {
+            'name' : "Restaurants",
+            'str_id' : "restaurants"
+          },
+          "menus" : { "$present" : true }
+        }],
+      };
     var url = 'https://api.locu.com/v2/venue/search';
     requestify.post(url, requestParams).then(function(response){
       deferred.resolve(response.getBody());
@@ -38,7 +46,7 @@ var queryRestaurant = function(req, res){
       deferred.reject(error);
     });
 
-    return deferred.promise
+    return deferred.promise;
   }
 
   return validateRequest().then(queryLocuApi);

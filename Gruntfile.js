@@ -6,13 +6,15 @@ module.exports = function(grunt){
   grunt.loadNpmTasks('grunt-nodemon');
   grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-mocha-istanbul');
+  grunt.loadNpmTasks('grunt-contrib-jshint');
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
 
     FILE_PATHS: {
       client: 'client',
-      server: 'server'
+      server: 'server',
+      serverTest: 'server/tests'
     },
 
     concat: {
@@ -72,12 +74,29 @@ module.exports = function(grunt){
         },
         src: ['server/tests/**/*Spec.js']
       }
+    },
+    jshint: {
+      options: {
+        jshintrc: '.jshintrc',
+        reporter: require('jshint-stylish')
+      },
+      client: [
+        '<%= FILE_PATHS.client %>/modules/{,**/}*.js'
+      ],
+      server: [
+        '<%= FILE_PATHS.server %>/modules/{,**/}*.js'
+      ],
+      tests: {
+        src: [
+          '<%= FILE_PATHS.serverTest %>/{,**/}*.js'
+        ]
+      }
     }
 
   });
 
   grunt.registerTask('buildDev', function(){
     console.log('building development');
-    grunt.task.run('injector:dev', 'wiredep:dev', 'mochaTest');
+    grunt.task.run('injector:dev', 'wiredep:dev', 'jshint', 'mochaTest');
   });
 };
