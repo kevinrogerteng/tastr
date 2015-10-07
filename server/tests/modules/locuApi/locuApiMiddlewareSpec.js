@@ -6,7 +6,7 @@
       mockgoose = require('mockgoose'),
       rewire = require('rewire'),
       middleware = rewire('../../../modules/locuApi/locuMiddleware.js'),
-      mockRestaurants = require('../../mocks/fixtures/restaurantQuery.js'),
+      mockRestaurants = require('../../mocks/fixtures/restaurantQueryPayload.js'),
       sinon = require('sinon'),
       sinonChai = require('sinon-chai'),
       httpMock = require('node-mocks-http'),
@@ -17,11 +17,15 @@
   var expect = chai.expect;
 
   describe('Locu API Middleware', function(){
-    describe('sample spec test', function(){
+    describe('Test Locu Api Payload', function(){
 
       it('should return a 200 - restaurantQuery', function(done){
         var req = httpMock.createRequest({
-          method: 'GET'
+          method: 'GET',
+          params: {
+            'name' : 'Gary Danko',
+            'location' : 'San Francisco'
+          }
         });
 
         var res = httpMock.createResponse();
@@ -41,11 +45,12 @@
         middleware.__set__('requestify', requestMock);
 
         return middleware.queryRestaurant(req, res).then(function(response){
-          expect(response[0].status).to.equal('success');
+          expect(response.status).to.equal('success');
+          expect(response.venues.length).to.equal(2);
+          expect(response.venues[0].location.locality).to.equal('San Francisco');
+          expect(response.venues[0].menus).to.exist; /* jshint ignore:line */
           done();
         }).done();
-
-
       });
     });
   });

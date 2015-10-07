@@ -9,5 +9,6 @@
     "angular" : false,
     "describe" : false,
     "module" : false
-  }
+  },
+  "browser" : true
 }

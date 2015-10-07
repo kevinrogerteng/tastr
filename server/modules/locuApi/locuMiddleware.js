@@ -12,31 +12,31 @@ var queryRestaurant = function(req, res){
   function validateRequest(){
     var deferred = Q.defer();
 
-    if (true) {
+    if (req.params.name && req.params.location) {
       deferred.resolve();
     } else {
       deferred.reject();
     }
 
     return deferred.promise;
-  } 
+  }
 
-  function queryLocuApi(validatedReq){
+  function queryLocuApi(){
 
     var deferred = Q.defer();
     var requestParams = {
         'api_key' : apiKey,
         'fields' : ['name', 'location', 'contact', 'menu_url', 'menus', 'categories'],
         'venue_queries' : [{
-          'name' : 'Park',
+          'name' : req.params.name,
           'location' : {
-            'locality' : "San Francisco"
+            'locality' : req.params.location
           }, 
           'categories': {
-            'name' : "Restaurants",
-            'str_id' : "restaurants"
+            'name' : 'Restaurants',
+            'str_id' : 'restaurants'
           },
-          "menus" : { "$present" : true }
+          'menus' : { '$present' : true }
         }],
       };
     var url = 'https://api.locu.com/v2/venue/search';
