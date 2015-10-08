@@ -4,6 +4,9 @@
 
 (function(angular){
 
-  angular.module('Tastr', ['ui.router']);
+  angular.module('Tastr', [
+    'ui.router',
+    'SearchRestoModule'
+  ]);
 
 })(angular);

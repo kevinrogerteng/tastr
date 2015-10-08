@@ -7,6 +7,7 @@ module.exports = function(grunt){
   grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-mocha-istanbul');
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-karma');
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
@@ -14,7 +15,8 @@ module.exports = function(grunt){
     FILE_PATHS: {
       client: 'client',
       server: 'server',
-      serverTest: 'server/tests'
+      serverTest: 'server/tests',
+      clientTest: 'client/tests'
     },
 
     concat: {
@@ -75,6 +77,13 @@ module.exports = function(grunt){
         src: ['server/tests/**/*Spec.js']
       }
     },
+
+    karma : {
+      unit: {
+        configFile: '<%= FILE_PATHS.clientTest %>/config/karma.conf.js'
+      }
+    },
+    
     jshint: {
       options: {
         jshintrc: '.jshintrc',
